@@ -4,8 +4,7 @@ rvm:
 deploy:
   provider: rubygems
   api_key:
-    secure:
-  gem: deepsort
+    secure: NA32J6gNIPNkkt1byh/JvlBQkKtpX2oW8txzA+/gQevaKdXIIN1XIASdUBIZF+F3afK5o61cWloriMaUQo861C5ZbM3ElYWIUR2KhviuCLWLGOsVIAuzDombQ/g3OoSSGR82wMlJMuSgRNI0J/Rut3va+3RZRj8phtQqbkJcVx9senuNNQ0UsndUMG8nYzEIlUFxrju931VJ0sMLdyBJN4NCwGnfu+LUWiWAALybjlz2W+7jc1u+ioYDItpcsQdJEUSZrueTz9oxmfJOBpzBLL98eoxp1dk1S6SgxnjJTRQcLQe36LUb6YTaXRSJ3Wvt6SD5CesnT5QKXbhXAOLU+WQKmIiQKX6YRJnbMtRH3qs0e6YiLYcYu64tqDnOnj+AgmV2GsNPHl9Yv3DFzYxoJgVDfmM/RNF8h3zFisuxfuomWrhW9Cfs+Yhfvxo9FyBAAcbGehXnx0F84XDMBcw7Gh3DnhmhwjOXERAHQOhooxxRCOlWyguo0zNjOQgkWGD5mvpgDQA/A6OBw32YLGssVhf1aLkW3PSZ+TRp5gyahpiOaPXoF0/9oBBQSztKuVG6bzX4tsTaL7F1MQQxYEjXrCQ6lv52X4k/bNVM8OtqGZ93lSE7YFnmaTWJQIkvegl9MtETiV6c+k6GfqYpYmYmAMYZa19jMxC2yDGTWe6YUrA=
   on:
     tags: true
     repo: mcrossen/deepsort

@@ -27,25 +27,25 @@ module DeepSort
     def deep_sort_by(&block)
       self.map do |value|
         if value.respond_to? :deep_sort_by
-          value.deep_sort_by &block
+          value.deep_sort_by(&block)
         elsif value.respond_to? :sort_by
-          value.sort_by &block
+          value.sort_by(&block)
         else
           value
         end
-      end.sort_by &block
+      end.sort_by(&block)
     end
 
     def deep_sort_by!(&block)
       self.map! do |value|
         if value.respond_to? :deep_sort_by!
-          value.deep_sort_by! &block
+          value.deep_sort_by!(&block)
         elsif value.respond_to? :sort_by!
-          value.sort_by! &block
+          value.sort_by!(&block)
         else
           value
         end
-      end.sort_by! &block
+      end.sort_by!(&block)
     end
   end
 
@@ -63,22 +63,22 @@ module DeepSort
     def deep_sort_by(&block)
       Hash[self.map do |key, value|
         [if key.respond_to? :deep_sort_by
-          key.deep_sort_by &block
+          key.deep_sort_by(&block)
         elsif key.respond_to? :sort_by
-          key.sort_by &block
+          key.sort_by(&block)
         else
           key
         end,
 
         if value.respond_to? :deep_sort_by
-          value.deep_sort_by &block
+          value.deep_sort_by(&block)
         elsif value.respond_to? :sort_by
-          value.sort_by &block
+          value.sort_by(&block)
         else
           value
         end]
 
-      end.sort_by &block]
+      end.sort_by(&block)]
     end
 
     # Ruby Hashes don't have in-place-modification like map!, each!, or sort!
@@ -87,15 +87,15 @@ module DeepSort
     def deep_sort_by!(&block)
       Hash[self.map do |key, value|
         if key.respond_to? :deep_sort_by!
-          key.deep_sort_by! &block
+          key.deep_sort_by!(&block)
         elsif key.respond_to? :sort_by!
-          key.sort_by! &block
+          key.sort_by!(&block)
         end
 
         if value.respond_to? :deep_sort!
-          value.deep_sort_by! &block
+          value.deep_sort_by!(&block)
         elsif value.respond_to? :sort_by!
-          value.sort_by! &block
+          value.sort_by!(&block)
         end
 
         [key, value]

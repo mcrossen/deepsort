@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+- 1.9.3
+deploy:
+  provider: rubygems
+  api_key:
+    secure:
+  gem: deepsort
+  on:
+    tags: true
+    repo: mcrossen/deepsort

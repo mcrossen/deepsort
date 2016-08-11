@@ -28,8 +28,6 @@ module DeepSort
       self.map do |value|
         if value.respond_to? :deep_sort_by
           value.deep_sort_by(&block)
-        elsif value.respond_to? :sort_by
-          value.sort_by(&block)
         else
           value
         end
@@ -40,8 +38,6 @@ module DeepSort
       self.map! do |value|
         if value.respond_to? :deep_sort_by!
           value.deep_sort_by!(&block)
-        elsif value.respond_to? :sort_by!
-          value.sort_by!(&block)
         else
           value
         end
@@ -64,16 +60,12 @@ module DeepSort
       Hash[self.map do |key, value|
         [if key.respond_to? :deep_sort_by
           key.deep_sort_by(&block)
-        elsif key.respond_to? :sort_by
-          key.sort_by(&block)
         else
           key
         end,
 
         if value.respond_to? :deep_sort_by
           value.deep_sort_by(&block)
-        elsif value.respond_to? :sort_by
-          value.sort_by(&block)
         else
           value
         end]

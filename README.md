@@ -30,6 +30,7 @@ puts nested.deep_sort
 to deepsort an array or hash in place, use the deep_sort! method
 ```ruby
 require "deepsort"
+
 nested = {"b" => 3, "a"=>[2, 1]}
 nested.deep_sort!
 puts nested

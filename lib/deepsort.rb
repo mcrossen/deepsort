@@ -46,7 +46,6 @@ module DeepSort
   end
 
   # inject this method into the Hash class to add deep sort functionality to Hashes
-  # Note: this cannot sort a hashes keys in place (deep_sort!), only the values
   module DeepSortHash
     def deep_sort
       deep_sort_by { |obj| obj }
@@ -73,25 +72,21 @@ module DeepSort
       end.sort_by(&block)]
     end
 
-    # Ruby Hashes don't have in-place-modification like map!, each!, or sort!
-    # that means that this method won't be able to sort the hash keys in place either.
-    # since Hashes are technically non-sorted key value pairs, this shouldn't be a problem
     def deep_sort_by!(&block)
-      Hash[self.map do |key, value|
-        if key.respond_to? :deep_sort_by!
+      replace(Hash[self.map do |key, value|
+        [if key.respond_to? :deep_sort_by!
           key.deep_sort_by!(&block)
-        elsif key.respond_to? :sort_by!
-          key.sort_by!(&block)
-        end
+        else
+          key
+        end,
 
-        if value.respond_to? :deep_sort!
+        if value.respond_to? :deep_sort_by!
           value.deep_sort_by!(&block)
-        elsif value.respond_to? :sort_by!
-          value.sort_by!(&block)
-        end
+        else
+          value
+        end]
 
-        [key, value]
-      end]
+      end.sort_by(&block)])
     end
   end
 end

@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'deepsort'
-  s.version     = '0.2.1'
+  s.version     = '0.2.2'
   s.date        = '2016-08-10'
   s.summary     = 'A utility to deep sort arrays and hashes.'
   s.description = 'deepsort recursively sorts nested ruby Arrays and Hashes.'

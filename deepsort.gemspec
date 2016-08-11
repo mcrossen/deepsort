@@ -8,4 +8,5 @@ Gem::Specification.new do |s|
   s.email       = 'markcrossen@studentbody.byu.edu'
   s.files       = ["lib/deepsort.rb"]
   s.homepage    = 'https://github.com/mcrossen/deepsort'
+  s.license     = 'MIT'
 end

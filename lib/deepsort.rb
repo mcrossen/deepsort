@@ -88,6 +88,11 @@ module DeepSort
 
       end.sort_by(&block)])
     end
+
+    # comparison for hashes is ill-defined. this performs array comparison if the normal comparison fails.
+    def <=>(other)
+      super(other) || to_a <=> other.to_a
+    end
   end
 end
 Array.send(:include, DeepSort::DeepSortArray)

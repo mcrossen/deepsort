@@ -70,4 +70,10 @@ class TestDeepSort < MiniTest::Unit::TestCase
     assert_equal({"a"=>["b", "c"], "d"=>"e"}.to_s, vector1.to_s)
     assert_equal([["a", "b"], ["c", "d"]].to_s, vector2.to_s)
   end
+
+  def test_hash_comparison
+    assert_equal(0, {} <=> Hash.new)
+    assert_equal(-1, {1=>2} <=> {2=>3})
+    assert_equal(1, {2=>3} <=> {1=>2})
+  end
 end

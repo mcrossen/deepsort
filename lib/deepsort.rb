@@ -89,9 +89,9 @@ module DeepSort
       end.sort_by(&block)])
     end
 
-    # comparison for hashes is ill-defined. this performs array comparison if the normal comparison fails.
+    # comparison for hashes is ill-defined. this performs array or string comparison if the normal comparison fails.
     def <=>(other)
-      super(other) || to_a <=> other.to_a
+      super(other) || to_a <=> other.to_a || to_s <=> other.to_s
     end
   end
 end

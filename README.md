@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/deepsort.svg)](https://badge.fury.io/rb/deepsort) [![Build Status](https://travis-ci.org/mcrossen/deepsort.svg?branch=master)](https://travis-ci.org/mcrossen/deepsort)
 
-'deepsort' is a ruby gem that adds the methods you've always wanted to Arrays and Hashes. The next time you need to sort or merge an array inside of a hash inside of an array, deepsort makes that as easy as calling .deep_sort or .deep_merge on the object.
+'deepsort' is a ruby gem that adds the methods you've always wanted to arrays and hashes. The next time you need to sort or merge an array inside of a hash inside of an array, deepsort makes that as easy as calling .deep_sort or .deep_merge on the object.
 
 ## Installation
 
@@ -11,14 +11,12 @@ To install deepsort, use the following terminal command:
 gem install deepsort
 ```
 
-## Usage
+### Deep Sorting
 
-To use deepsort, include it in your project like so:
+To add deep sorting functionality to arrays and hashes, include it in your project like so:
 ```ruby
 require "deepsort"
 ```
-
-### Deep Sorting
 
 To deeply sort an array or hash without changing the object itself, use the 'deep_sort' method.
 ```ruby
@@ -49,7 +47,12 @@ puts [{"c" => [2, 1]}, ["b", "a"]].deep_sort_by {|obj| obj.to_s}
 
 ### Deep Merging
 
-The deepsort gem also includes deep merging capabilities. This concatinates arrays and merges hashes in large nested structures.
+The deepsort gem also includes deep merging capabilities. This concatinates arrays and merges hashes in large nested structures. To add deep merging functionality to arrays and hashes, include it in your project like so:
+```ruby
+require "deepmerge"
+```
+
+Using deepmerge is similar to deepsort. The biggest difference is that the structure to be merged with is passed in as an argument.
 ```ruby
 require "deepsort"
 

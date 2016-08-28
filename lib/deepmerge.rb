@@ -8,7 +8,13 @@ module DeepMerge
   # inject this method into the Array class to add deep merging functionality to Arrays
   module DeepMergeArray
     def deep_merge(other)
-      concat(other).uniq
+      (self+other).uniq
+    end
+
+    def deep_merge!(other)
+      # in ruby, uniq! returns nil if there are no changes unlike uniq which returns the array
+      # because of this uniq has to be used here with a replacement instead of uniq!
+      replace(concat(other).uniq)
     end
   end
 
@@ -18,6 +24,16 @@ module DeepMerge
       merge(other) do |key, oldval, newval|
         if oldval.respond_to? :deep_merge
           oldval.deep_merge(newval)
+        else
+          newval
+        end
+      end
+    end
+
+    def deep_merge!(other)
+      merge!(other) do |key, oldval, newval|
+        if oldval.respond_to? :deep_merge!
+          oldval.deep_merge!(newval)
         else
           newval
         end

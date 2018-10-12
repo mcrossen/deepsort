@@ -47,7 +47,7 @@ puts [{"c" => [2, 1]}, ["b", "a"]].deep_sort_by {|obj| obj.to_s}
 
 ### Deep Merging
 
-The deepsort gem also includes deep merging capabilities. This concatinates arrays and merges hashes in large nested structures. To add deep merging functionality to arrays and hashes, include it in your project like so:
+The deepsort gem also includes deep merging capabilities. This concatenates arrays and merges hashes in large nested structures. To add deep merging functionality to arrays and hashes, include it in your project like so:
 ```ruby
 require "deepmerge"
 ```

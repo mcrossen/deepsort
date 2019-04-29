@@ -1,9 +1,8 @@
-require "minitest/autorun"
+require_relative "helper"
 require "deepsort"
 
 # much of the assertions are compared by string. this is because hash comparisons don't care about order - string comparisons do
-class TestDeepSort < MiniTest::Unit::TestCase
-
+class TestDeepSort < Minitest::Test
   def test_shallow_sort_array
     vector = [3, 2, 1]
     assert_equal([1, 2, 3], vector.deep_sort)

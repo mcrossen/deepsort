@@ -1,6 +1,8 @@
 require_relative "helper"
 require "deepsort"
 
+SingleCov.covered! file: "lib/deepsort.rb", uncovered:12
+
 # much of the assertions are compared by string. this is because hash comparisons don't care about order - string comparisons do
 class TestDeepSort < Minitest::Test
   def test_shallow_sort_array

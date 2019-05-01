@@ -1,3 +1,8 @@
 require "bundler/setup"
-require "minitest/autorun"
 
+require "single_cov"
+SingleCov.setup :minitest
+
+require "maxitest/autorun"
+
+$LOAD_PATH << "lib"

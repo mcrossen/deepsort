@@ -1,6 +1,8 @@
 require_relative "helper"
 require "deepmerge"
 
+SingleCov.covered! file: "lib/deepmerge.rb", uncovered:2
+
 # much of the assertions are compared by string. this is because hash comparisons don't care about order - string comparisons do
 class TestDeepMerge < Minitest::Test
   def test_array_shallow_merge

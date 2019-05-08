@@ -1,10 +1,10 @@
 require_relative "helper"
 require "deepsort"
 
-SingleCov.covered! file: "lib/deepsort.rb", uncovered:12
+SingleCov.covered! file: "lib/deepsort.rb"
 
 # much of the assertions are compared by string. this is because hash comparisons don't care about order - string comparisons do
-class TestDeepSort < Minitest::Test
+describe DeepSort do
   def test_shallow_sort_array
     vector = [3, 2, 1]
     assert_equal([1, 2, 3], vector.deep_sort)
@@ -76,5 +76,58 @@ class TestDeepSort < Minitest::Test
     assert_equal(0, {} <=> Hash.new)
     assert_equal(-1, {1=>2} <=> {2=>3})
     assert_equal(1, {2=>3} <=> {1=>2})
+  end
+
+  describe "#deep_sort_by" do
+    it "sorts by given block" do
+      original = {a: [1, 2], [1, 2] => :a}
+      result = original.deep_sort_by { |x| x.is_a?(Array) ? 1 : -x }
+      result.must_equal a: [2, 1], [2, 1] => :a
+      original.must_equal a: [1, 2], [1, 2] => :a
+    end
+  end
+
+  describe "#deep_sort_by!" do
+    it "replaces with sorted by given block" do
+      original = {a: [1, 2], [1, 2] => :a}
+      result = original.deep_sort_by! { |x| x.is_a?(Array) ? 1 : -x }
+      original.must_equal a: [2, 1], [2, 1] => :a
+      original.object_id.must_equal result.object_id
+    end
+  end
+
+  describe "Object#deep_sort" do
+    it "sorts deeply" do
+      original = [["a"], ["b", "a"]]
+      result = deep_sort(original)
+      result.must_equal [["a"], ["a", "b"]]
+      original.must_equal [["a"], ["b", "a"]]
+    end
+
+    it "sorts normally when deep is not available" do
+      fake = Class.new { define_method(:sort) { 1 } }.new
+      deep_sort(fake).must_equal 1
+    end
+
+    it "does not sort when sort is not available" do
+      deep_sort(1).must_equal 1
+    end
+  end
+
+  describe "Object#deep_sort" do
+    it "sorts deeply" do
+      original = [["a"], ["b", "a"]]
+      deep_sort!(original)
+      original.must_equal [["a"], ["a", "b"]]
+    end
+
+    it "sorts normally when deep is not available" do
+      fake = Class.new { define_method(:sort!) { 1 } }.new
+      deep_sort!(fake).must_equal 1
+    end
+
+    it "does not sort when sort is not available" do
+      deep_sort!(1).must_equal 1
+    end
   end
 end

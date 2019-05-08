@@ -86,7 +86,7 @@ module DeepSort
           value
         end]
 
-      end.sort_by(&block)])
+      end.sort_by!(&block)])
     end
 
     # comparison for hashes is ill-defined. this performs array or string comparison if the normal comparison fails.

@@ -1,5 +1,4 @@
+require 'bundler/setup'
 require 'rake/testtask'
 
-task :default => :test
-
-Rake::TestTask.new(:test)
+Rake::TestTask.new(:default)

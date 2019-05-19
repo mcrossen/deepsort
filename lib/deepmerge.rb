@@ -21,7 +21,7 @@ module DeepMerge
   # inject this method into the Hash class to add deep merge functionality to Hashes
   module DeepMergeHash
     def deep_merge(other)
-      merge(other) do |key, oldval, newval|
+      merge(other) do |_key, oldval, newval|
         if oldval.respond_to? :deep_merge
           oldval.deep_merge(newval)
         else
@@ -31,7 +31,7 @@ module DeepMerge
     end
 
     def deep_merge!(other)
-      merge!(other) do |key, oldval, newval|
+      merge!(other) do |_key, oldval, newval|
         if oldval.respond_to? :deep_merge!
           oldval.deep_merge!(newval)
         else

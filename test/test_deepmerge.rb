@@ -1,10 +1,10 @@
 require_relative "helper"
 require "deepmerge"
 
-SingleCov.covered! file: "lib/deepmerge.rb", uncovered:2
+SingleCov.covered!
 
-# much of the assertions are compared by string. this is because hash comparisons don't care about order - string comparisons do
-class TestDeepMerge < Minitest::Test
+# most assertions compare by string because hashes don't care about order
+describe DeepMerge do
   def test_array_shallow_merge
     vector = [1]
     assert_equal([1, 2], vector.deep_merge([2]))
@@ -43,5 +43,10 @@ class TestDeepMerge < Minitest::Test
     assert_equal({a:[1, {b:2}], c:{d:[3,4]}}, vector)
     vector.deep_merge!({a:["b"], c:{d:[5], e:"hello"}})
     assert_equal({a:[1, {b:2}, "b"], c:{d:[3,4,5], e:"hello"}}, vector)
+  end
+
+  it "overrides on collision" do
+    {a: 1}.deep_merge(a: 2).must_equal a: 2
+    {a: 1}.deep_merge!(a: 2).must_equal a: 2
   end
 end

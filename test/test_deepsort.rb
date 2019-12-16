@@ -59,6 +59,29 @@ describe DeepSort do
     assert_equal(sorted.to_s, vector.to_s)
   end
 
+  def test_skip
+    initial_hashs  = {1=>2, 9=>[10, 12, 11], 3=>{6=>[8, 7], 4=>5}}
+    initial_arrays = {1=>2, 9=>[10, 12, 11], 3=>{6=>[8, 7], 4=>5}}
+    sorted_hashs   = {1=>2, 3=>{4=>5, 6=>[8, 7]}, 9=>[10, 12, 11]}
+    sorted_arrays  = {1=>2, 9=>[10, 11, 12], 3=>{6=>[7, 8], 4=>5}}
+
+    vector = initial_hashs
+    assert_equal(sorted_hashs.to_s, vector.deep_sort(array: false).to_s)
+    # ensure it didn't sort in place
+    assert_equal(initial_hashs.to_s, vector.to_s)
+    # now sort in place and vector
+    vector.deep_sort!(array: false)
+    assert_equal(sorted_hashs.to_s, vector.to_s)
+
+    vector = initial_arrays
+    assert_equal(sorted_arrays.to_s, vector.deep_sort(hash: false).to_s)
+    # ensure it didn't sort in place
+    assert_equal(initial_arrays.to_s, vector.to_s)
+    # now sort in place and vector
+    vector.deep_sort!(hash: false)
+    assert_equal(sorted_arrays.to_s, vector.to_s)
+  end
+
   def test_non_fixnum
     vector1 = {"d"=>"e", "a"=>["c", "b"]}
     vector2 = [["d", "c"], ["a", "b"]]
@@ -114,7 +137,7 @@ describe DeepSort do
     end
   end
 
-  describe "Object#deep_sort" do
+  describe "Object#deep_sort!" do
     it "sorts deeply" do
       original = [["a"], ["b", "a"]]
       deep_sort!(original)

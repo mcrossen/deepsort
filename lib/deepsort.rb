@@ -16,77 +16,80 @@
 module DeepSort
   # inject this method into the Array class to add deep sort functionality to Arrays
   module DeepSortArray
-    def deep_sort
-      deep_sort_by { |obj| obj }
+    def deep_sort(options = {})
+      deep_sort_by(options) { |obj| obj }
     end
 
-    def deep_sort!
-      deep_sort_by! { |obj| obj }
+    def deep_sort!(options = {})
+      deep_sort_by!(options) { |obj| obj }
     end
 
-    def deep_sort_by(&block)
-      self.map do |value|
-        if value.respond_to? :deep_sort_by
-          value.deep_sort_by(&block)
+    def deep_sort_by(options = {}, &block)
+      array = self.map do |value|
+        if value.respond_to?(:deep_sort_by)
+          value.deep_sort_by(options, &block)
         else
           value
         end
-      end.sort_by(&block)
+      end
+      options[:array] == false ? array : array.sort_by(&block)
     end
 
-    def deep_sort_by!(&block)
-      self.map! do |value|
-        if value.respond_to? :deep_sort_by!
-          value.deep_sort_by!(&block)
+    def deep_sort_by!(options = {}, &block)
+      array = self.map! do |value|
+        if value.respond_to?(:deep_sort_by!)
+          value.deep_sort_by!(options, &block)
         else
           value
         end
-      end.sort_by!(&block)
+      end
+      options[:array] == false ? array : array.sort_by!(&block)
     end
   end
 
   # inject this method into the Hash class to add deep sort functionality to Hashes
   module DeepSortHash
-    def deep_sort
-      deep_sort_by { |obj| obj }
+    def deep_sort(options = {})
+      deep_sort_by(options) { |obj| obj }
     end
 
-    def deep_sort!
-      deep_sort_by! { |obj| obj }
+    def deep_sort!(options = {})
+      deep_sort_by!(options) { |obj| obj }
     end
 
-    def deep_sort_by(&block)
-      Hash[self.map do |key, value|
-        [if key.respond_to? :deep_sort_by
-          key.deep_sort_by(&block)
+    def deep_sort_by(options = {}, &block)
+      hash = self.map do |key, value|
+        [if key.respond_to?(:deep_sort_by)
+          key.deep_sort_by(options, &block)
         else
           key
         end,
 
-        if value.respond_to? :deep_sort_by
-          value.deep_sort_by(&block)
+        if value.respond_to?(:deep_sort_by)
+          value.deep_sort_by(options, &block)
         else
           value
         end]
+      end
 
-      end.sort_by(&block)]
+      Hash[options[:hash] == false ? hash : hash.sort_by(&block)]
     end
 
-    def deep_sort_by!(&block)
-      replace(Hash[self.map do |key, value|
-        [if key.respond_to? :deep_sort_by!
-          key.deep_sort_by!(&block)
+    def deep_sort_by!(options = {}, &block)
+      hash = self.map do |key, value|
+        [if key.respond_to?(:deep_sort_by!)
+          key.deep_sort_by!(options, &block)
         else
           key
         end,
 
-        if value.respond_to? :deep_sort_by!
-          value.deep_sort_by!(&block)
+        if value.respond_to?(:deep_sort_by!)
+          value.deep_sort_by!(options, &block)
         else
           value
         end]
-
-      end.sort_by!(&block)])
+      end
+      replace(Hash[options[:hash] == false ? hash : hash.sort_by!(&block)])
     end
 
     # comparison for hashes is ill-defined. this performs array or string comparison if the normal comparison fails.
@@ -101,9 +104,9 @@ Hash.send(:include, DeepSort::DeepSortHash)
 
 # and if you don't like calling member methods on objects, these two functions do it for you.
 # if the object cannot be deep sorted, it will simply return the sorted object or the object itself if sorting isn't available.
-def deep_sort(obj)
+def deep_sort(obj, options = {})
   if obj.respond_to? :deep_sort
-    obj.deep_sort
+    obj.deep_sort(options)
   elsif obj.respond_to? :sort
     obj.sort
   else
@@ -112,9 +115,9 @@ def deep_sort(obj)
 end
 
 # similar to the deep_sort method, but performs the deep sort in place
-def deep_sort!(obj)
+def deep_sort!(obj, options = {})
   if obj.respond_to? :deep_sort!
-    obj.deep_sort!
+    obj.deep_sort!(options)
   elsif obj.respond_to? :sort!
     obj.sort!
   else

@@ -45,6 +45,17 @@ puts [{"c" => [2, 1]}, ["b", "a"]].deep_sort_by {|obj| obj.to_s}
 # => [["a", "b"], {"c" => [1, 2]}]
 ```
 
+Skip arrays or hashs sorting.
+```ruby
+require "deepsort"
+
+puts {"b" => [2, 1], "a" => [4, 3]}.deep_sort(array: false)
+# => {"a" => [4, 3], "b" => [2, 1]}
+
+puts {"b" => [2, 1], "a" => [4, 3]}.deep_sort(hash: false)
+# => {"b" => [1, 2], "a" => [3, 4]}
+```
+
 ### Deep Merging
 
 The deepsort gem also includes deep merging capabilities. This concatenates arrays and merges hashes in large nested structures. To add deep merging functionality to arrays and hashes, include it in your project like so:

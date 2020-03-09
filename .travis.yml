@@ -13,3 +13,4 @@ deploy:
   on:
     tags: true
     repo: mcrossen/deepsort
+    rvm: 2.3

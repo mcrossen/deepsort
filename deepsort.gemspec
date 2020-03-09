@@ -1,4 +1,4 @@
-Gem::Specification.new 'deepsort', '0.4.4' do |s|
+Gem::Specification.new 'deepsort', '0.4.5' do |s|
   s.summary     = 'A utility to deep sort arrays and hashes.'
   s.description = 'Recursively sort nested ruby Arrays and Hashes + deepmerge'
   s.authors     = ["Mark Crossen"]

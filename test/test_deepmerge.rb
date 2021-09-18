@@ -49,4 +49,30 @@ describe DeepMerge do
     {a: 1}.deep_merge(a: 2).must_equal a: 2
     {a: 1}.deep_merge!(a: 2).must_equal a: 2
   end
+
+  describe "Object#deep_merge" do
+    it "merges deeply" do
+      vector = {a:[1,2], b:3}
+      result = deep_merge(vector, {a:[3], c:4})
+      result.must_equal({a:[1,2,3], b:3, c:4})
+      vector.must_equal({a:[1,2], b:3})
+    end
+
+    it "does not merge when deep_merge is not available" do
+      deep_merge(1, 1).must_equal 1
+    end
+  end
+
+  describe "Object#deep_merge!" do
+    it "merges deeply" do
+      vector = {a:[1,2], b:3}
+      result = deep_merge!(vector, {a:[3], c:4})
+      result.must_equal({a:[1,2,3], b:3, c:4})
+      vector.must_equal(result)
+    end
+
+    it "does not merge when deep_merge is not available" do
+      deep_merge!(1, 1).must_equal 1
+    end
+  end
 end

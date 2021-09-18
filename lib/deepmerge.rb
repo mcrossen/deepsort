@@ -44,3 +44,22 @@ end
 
 Array.send(:include, DeepMerge::DeepMergeArray)
 Hash.send(:include, DeepMerge::DeepMergeHash)
+
+
+# and if you don't like calling member methods on objects, these two functions do it for you.
+def deep_merge(source, other)
+  if source.respond_to? :deep_merge
+    source.deep_merge(other)
+  else
+    other
+  end
+end
+
+# similar to the deep_merge method, but performs the deep merge in place
+def deep_merge!(source, other)
+  if source.respond_to? :deep_merge
+    source.deep_merge!(other)
+  else
+    other
+  end
+end

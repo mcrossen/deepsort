@@ -65,7 +65,7 @@ require "deepmerge"
 
 Using deepmerge is similar to deepsort. The biggest difference is that the structure to be merged with is passed in as an argument.
 ```ruby
-require "deepsort"
+require "deepmerge"
 
 nested = {"a" => [1, 2], "b" => 3}
 puts nested.deep_merge({"a" => [3], "c" => 4})

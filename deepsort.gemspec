@@ -1,4 +1,4 @@
-Gem::Specification.new 'deepsort', '0.4.5' do |s|
+Gem::Specification.new 'deepsort', '0.5.0' do |s|
   s.summary     = 'A utility to deep sort arrays and hashes.'
   s.description = 'Recursively sort nested ruby Arrays and Hashes + deepmerge'
   s.authors     = ["Mark Crossen"]
@@ -6,5 +6,5 @@ Gem::Specification.new 'deepsort', '0.4.5' do |s|
   s.files       = `git ls-files lib LICENSE`.split("\n")
   s.homepage    = 'https://github.com/mcrossen/deepsort'
   s.license     = 'MIT'
-  s.required_ruby_version = '>= 2.2.0'
+  s.required_ruby_version = '>= 2.3.0'
 end

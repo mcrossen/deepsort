@@ -5,7 +5,7 @@ SingleCov.covered!
 
 # much of the assertions are compared by string. this is because hash comparisons don't care about order - string comparisons do
 describe DeepSort do
-  def test_shallow_sort_array
+  def test_array_shallow_sort
     vector = [3, 2, 1]
     assert_equal([1, 2, 3], vector.deep_sort)
     # ensure it didn't sort in place
@@ -15,7 +15,7 @@ describe DeepSort do
     assert_equal([1, 2, 3], vector)
   end
 
-  def test_shallow_sort_hash
+  def test_hash_shallow_sort
     vector = {3=>4, 1=>2}
     assert_equal({1=>2, 3=>4}.to_s, vector.deep_sort.to_s)
     # ensure it didn't sort in place
@@ -47,7 +47,7 @@ describe DeepSort do
     assert_equal({1=>[2, 3], 4=>5}.to_s, vector.to_s)
   end
 
-  def test_big_structure
+  def test_nested_structure
     initial  = {1=>2, 9=>[10, 12, 11], 3=>{6=>[8, 7], 4=>5}}
     sorted   = {1=>2, 3=>{4=>5, 6=>[7, 8]}, 9=>[10, 11, 12]}
     vector = initial
@@ -127,12 +127,12 @@ describe DeepSort do
       original.must_equal [["a"], ["b", "a"]]
     end
 
-    it "sorts normally when deep is not available" do
+    it "sorts normally when deep_sort is not available" do
       fake = Class.new { define_method(:sort) { 1 } }.new
       deep_sort(fake).must_equal 1
     end
 
-    it "does not sort when sort is not available" do
+    it "does not sort when deep_sort is not available" do
       deep_sort(1).must_equal 1
     end
   end
@@ -144,12 +144,12 @@ describe DeepSort do
       original.must_equal [["a"], ["a", "b"]]
     end
 
-    it "sorts normally when deep is not available" do
+    it "sorts normally when deep_sort is not available" do
       fake = Class.new { define_method(:sort!) { 1 } }.new
       deep_sort!(fake).must_equal 1
     end
 
-    it "does not sort when sort is not available" do
+    it "does not sort when deep_sort is not available" do
       deep_sort!(1).must_equal 1
     end
   end

@@ -37,7 +37,7 @@ describe DeepMerge do
     assert_equal([{a:1}, {b:2}, {a:3}, {c:4}], vector)
   end
 
-  def test_large_structure
+  def test_nested_structure
     vector = {a:[1, {b:2}], c:{d:[3,4]}}
     assert_equal({a:[1, {b:2}, "b"], c:{d:[3,4,5], e:"hello"}}, vector.deep_merge({a:["b"], c:{d:[5], e:"hello"}}))
     assert_equal({a:[1, {b:2}], c:{d:[3,4]}}, vector)

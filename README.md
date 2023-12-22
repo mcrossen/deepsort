@@ -1,6 +1,8 @@
 # deepsort
 
-[![Gem Version](https://badge.fury.io/rb/deepsort.svg)](https://badge.fury.io/rb/deepsort) [![Build Status](https://travis-ci.org/mcrossen/deepsort.svg?branch=main)](https://travis-ci.org/mcrossen/deepsort) [![Coverage](https://img.shields.io/badge/coverage-100%25-success.svg)](https://github.com/grosser/single_cov)
+[![Gem Version](https://img.shields.io/gem/v/deepsort.svg?&color=brightgreen)](https://rubygems.org/gems/deepsort)
+[![Build Status](https://github.com/mcrossen/deepsort/workflows/Ruby/badge.svg)](https://github.com/mcrossen/deepsort/workflows/Ruby.yml)
+[![Coverage](https://img.shields.io/badge/coverage-100%25-success.svg)](https://github.com/grosser/single_cov)
 
 'deepsort' is a ruby gem that adds the methods you've always wanted to arrays and hashes. The next time you need to sort or merge an array inside of a hash inside of an array, deepsort makes that as easy as calling .deep_sort or .deep_merge on the object.
 
